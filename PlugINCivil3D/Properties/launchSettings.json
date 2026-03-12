@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Civil3D": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Autodesk\\AutoCAD 2025\\acad.exe",
+      "workingDirectory": "C:\\Program Files\\Autodesk\\AutoCAD 2025"    
+    }
+  }
+}

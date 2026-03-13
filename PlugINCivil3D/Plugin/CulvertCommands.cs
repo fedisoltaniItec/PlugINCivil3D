@@ -1,7 +1,6 @@
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Runtime;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using PlugINCivil3D.Application.Interfaces;
 using PlugINCivil3D.Presentation.ViewModels;
 using PlugINCivil3D.Presentation.Views;
@@ -15,12 +14,6 @@ public sealed class CulvertCommands
     {
         var editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
         editor.WriteMessage("\nPlugINCivil3D loaded. CULVERTCREATE is available.");
-    private readonly ILogger<CulvertCommands> _logger;
-
-    // Injection du logger
-    public CulvertCommands(ILogger<CulvertCommands> logger)
-    {
-        _logger = logger;
     }
 
     [CommandMethod("CULVERTCREATE")]

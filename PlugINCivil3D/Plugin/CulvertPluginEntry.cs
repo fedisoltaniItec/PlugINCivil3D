@@ -6,18 +6,22 @@ public sealed class CulvertPluginEntry : IExtensionApplication
 {
     public void Initialize()
     {
-        _ = CompositionRoot.Provider;
+        PluginDiagnostics.Initialize();
+        PluginDiagnostics.Log("CulvertPluginEntry.Initialize start");
+
         try
         {
-            var editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument?.Editor;
-            editor?.WriteMessage("\nPlugINCivil3D initialized.");
+            _ = CompositionRoot.Provider;
+            PluginDiagnostics.WriteToEditor("PlugINCivil3D initialized.");
+            PluginDiagnostics.Log("CulvertPluginEntry.Initialize success");
         }
-        catch
+        catch (System.Exception ex)
         {
-            // no-op to avoid load breakage in startup contexts
+            PluginDiagnostics.Log("CulvertPluginEntry.Initialize failure", ex);
+            PluginDiagnostics.WriteToEditor($"PlugINCivil3D init failed: {ex.Message}");
+            throw;
         }
     }
-    public void Initialize() => _ = CompositionRoot.Provider;
 
     public void Terminate()
     {

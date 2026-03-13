@@ -12,6 +12,7 @@ public sealed class CulvertCommands
     [CommandMethod("CULVERTPING")]
     public void Ping()
     {
+        PluginDiagnostics.Log("CULVERTPING executed");
         var editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
         editor.WriteMessage("\nPlugINCivil3D loaded. CULVERTCREATE is available.");
     }
@@ -21,6 +22,7 @@ public sealed class CulvertCommands
     {
         try
         {
+            PluginDiagnostics.Log("CULVERTCREATE start");
             var provider = CompositionRoot.Provider;
             var orchestrator = provider.GetRequiredService<ICulvertOrchestrator>();
             var validator = provider.GetRequiredService<ICulvertValidationService>();
@@ -32,14 +34,14 @@ public sealed class CulvertCommands
             var vm = new CulvertViewModel(culvert, culvert.Usil + 2.0, validator, orchestrator, report);
             var window = new CulvertWindow(vm);
             Autodesk.AutoCAD.ApplicationServices.Application.ShowModelessWindow(window);
+            PluginDiagnostics.Log("CULVERTCREATE window shown");
         }
         catch (System.Exception ex)
         {
+            PluginDiagnostics.Log("CULVERTCREATE failed", ex);
             var editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
             editor.WriteMessage($"\nCULVERTCREATE failed: {ex.Message}");
-            _logger.LogError(ex, "Failed to create culvert.");
-            Autodesk.AutoCAD.ApplicationServices.Application.ShowAlertDialog(
-                "Erreur lors de la création du culvert : " + ex.Message);
+            editor.WriteMessage($"\nSee log: {PluginDiagnostics.LogFilePath}");
         }
     }
 }

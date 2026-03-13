@@ -17,6 +17,7 @@ public sealed class CulvertPluginEntry : IExtensionApplication
             // no-op to avoid load breakage in startup contexts
         }
     }
+    public void Initialize() => _ = CompositionRoot.Provider;
 
     public void Terminate()
     {

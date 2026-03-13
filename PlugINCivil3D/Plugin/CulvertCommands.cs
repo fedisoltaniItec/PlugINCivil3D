@@ -37,6 +37,9 @@ public sealed class CulvertCommands
         {
             var editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
             editor.WriteMessage($"\nCULVERTCREATE failed: {ex.Message}");
+            _logger.LogError(ex, "Failed to create culvert.");
+            Autodesk.AutoCAD.ApplicationServices.Application.ShowAlertDialog(
+                "Erreur lors de la création du culvert : " + ex.Message);
         }
     }
 }

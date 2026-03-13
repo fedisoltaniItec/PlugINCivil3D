@@ -16,6 +16,7 @@ public sealed class CulvertGeometryService : ICulvertGeometryService
 
     public Task<ObjectIdCollection> GenerateAsync(Culvert culvert, ObjectId axisId, CancellationToken cancellationToken = default)
     {
+        var doc = Application.DocumentManager.MdiActiveDocument;
         var doc = Autodesk.AutoCAD.ApplicationServices.Application
             .DocumentManager
             .MdiActiveDocument;

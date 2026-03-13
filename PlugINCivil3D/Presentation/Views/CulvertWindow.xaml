@@ -2,6 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Culvert Creator" Height="540" Width="480" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibility" />
+    </Window.Resources>
     <ScrollViewer>
         <StackPanel Margin="12">
             <TextBlock Text="Culvert ID" FontWeight="Bold"/>
@@ -16,6 +19,7 @@
             <TextBlock Text="{Binding Model.Slope}" Margin="0,0,0,8"/>
             <TextBlock Text="Skew" FontWeight="Bold"/>
             <TextBlock Text="{Binding Model.SkewAngle}" Margin="0,0,0,8"/>
+            <TextBlock Text="Coverage warning active" Foreground="Red" Visibility="{Binding Model.Warning, Converter={StaticResource BoolToVisibility}}"/>
             <TextBlock Text="Coverage warning active" Foreground="Red"/>
             <Button Content="Validate" Command="{Binding ValidateCommand}" Margin="0,8,0,4"/>
             <Button Content="Generate" Command="{Binding GenerateCommand}" Margin="0,0,0,4"/>

@@ -10,6 +10,11 @@ namespace PlugINCivil3D.Plugin;
 
 public sealed class CulvertCommands
 {
+    [CommandMethod("CULVERTPING")]
+    public void Ping()
+    {
+        var editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
+        editor.WriteMessage("\nPlugINCivil3D loaded. CULVERTCREATE is available.");
     private readonly ILogger<CulvertCommands> _logger;
 
     // Injection du logger
@@ -37,6 +42,8 @@ public sealed class CulvertCommands
         }
         catch (System.Exception ex)
         {
+            var editor = Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
+            editor.WriteMessage($"\nCULVERTCREATE failed: {ex.Message}");
             _logger.LogError(ex, "Failed to create culvert.");
             Autodesk.AutoCAD.ApplicationServices.Application.ShowAlertDialog(
                 "Erreur lors de la création du culvert : " + ex.Message);

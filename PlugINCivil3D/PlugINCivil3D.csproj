@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
@@ -28,6 +28,10 @@
     </Reference>
     <Reference Include="AeccDbMgd">
       <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2025\C3D\AeccDbMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AeccLandMgd">
+      <HintPath>..\..\..\..\..\..\..\Program Files\Autodesk\AutoCAD 2025\C3D\AeccLandMgd.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

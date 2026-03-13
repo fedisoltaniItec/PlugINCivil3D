@@ -19,9 +19,10 @@ public sealed class CivilObjectSelector : ICivilObjectSelector
 
     public Task<ObjectId> SelectCulvertAxisAsync(CancellationToken cancellationToken = default)
     {
-        var options = new PromptEntityOptions("\nSelect culvert axis (Polyline):");
-        options.SetRejectMessage("\nOnly Polyline allowed.");
+        var options = new PromptEntityOptions("\nSelect culvert axis (Polyline or Alignment):");
+        options.SetRejectMessage("\nOnly Polyline or Alignment allowed.");
         options.AddAllowedClass(typeof(Polyline), true);
+        options.AddAllowedClass(typeof(Alignment), true);
         return Task.FromResult(GetEntity(options, "Culvert axis not selected."));
     }
 
@@ -35,7 +36,10 @@ public sealed class CivilObjectSelector : ICivilObjectSelector
 
     private static ObjectId GetEntity(PromptEntityOptions options, string errorMessage)
     {
-        var editor = Application.DocumentManager.MdiActiveDocument.Editor;
+        var editor = Autodesk.AutoCAD.ApplicationServices.Application
+    .DocumentManager
+    .MdiActiveDocument
+    .Editor;
         var result = editor.GetEntity(options);
         if (result.Status != PromptStatus.OK)
         {

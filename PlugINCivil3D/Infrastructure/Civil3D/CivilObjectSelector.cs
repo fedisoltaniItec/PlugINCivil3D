@@ -36,7 +36,10 @@ public sealed class CivilObjectSelector : ICivilObjectSelector
 
     private static ObjectId GetEntity(PromptEntityOptions options, string errorMessage)
     {
-        var editor = Application.DocumentManager.MdiActiveDocument.Editor;
+        var editor = Autodesk.AutoCAD.ApplicationServices.Application
+    .DocumentManager
+    .MdiActiveDocument
+    .Editor;
         var result = editor.GetEntity(options);
         if (result.Status != PromptStatus.OK)
         {
